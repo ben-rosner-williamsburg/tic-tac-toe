@@ -43,8 +43,9 @@ td {
   margin-top: -20px;
 }
 
-.wins-container > .emoji {
+.wins-container > .emoji, .token {
   font-size: 48px;
+  text-align: center;
 }
 
 .game-container {

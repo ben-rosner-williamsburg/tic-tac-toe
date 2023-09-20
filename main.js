@@ -10,30 +10,22 @@ var gameState = {
 
 var playerOne = createPlayer(1, "❎");
 var playerTwo = createPlayer(2, "🅾️");
+var currentPlayer = playerOne
 
 playerOneContainer.addEventListener("load", displayPlayerInfo(playerOne, playerOneContainer));
 playerTwoContainer.addEventListener("load", displayPlayerInfo(playerTwo, playerTwoContainer));
 gameBoard.addEventListener("click", function (event) {
-  if (playerOne.turn = true) {
-    gameBoardState(playerOne, event);
-    takeTurn(playerOne, playerTwo);
-    occupySpace(event);
-    displayToken(playerOne, event);
-  }
-  else if (playerTwo.turn = true) {
-    gameBoardState(playerTwo, event);
-    takeTurn(playerTwo, playerOne);
-    occupySpace(event);
-    displayToken(playerTwo, event);
-  }
+  takeTurn()
+  gameBoardState(currentPlayer, event);
+  occupySpace(event);
+  displayToken(currentPlayer, event);
 })
-
 
 function createPlayer(id, token, wins = 0) {
   var player = {
     id: id,
     token: token,
-    wins: wins
+    wins: wins,
   }
   return player;
 }
@@ -55,13 +47,17 @@ function gameBoardState(player, event) {
   }
 }
 
-function takeTurn(player, otherPlayer) {
-  player.turn = true;
-  otherPlayer.turn = false;
+function takeTurn() {
+    if (currentPlayer === playerOne) {
+      currentPlayer = playerTwo;
+    }
+    else {
+      currentPlayer = playerOne;
+    }
 }
 
 function displayToken(player, event) {
-  event.target.innerHTML = `<h1>${player.token}</h1>`
+  event.target.innerHTML = `<h1 class="token">${player.token}</h1>`
 }
 
 function occupySpace(event) {
