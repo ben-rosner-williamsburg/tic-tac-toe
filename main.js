@@ -17,13 +17,13 @@ gameBoard.addEventListener("click", function (event) {
   if (playerOne.turn = true) {
     gameBoardState(playerOne, event);
     takeTurn(playerOne, playerTwo);
-    checkSpace(event);
+    occupySpace(event);
     displayToken(playerOne, event);
   }
   else if (playerTwo.turn = true) {
     gameBoardState(playerTwo, event);
     takeTurn(playerTwo, playerOne);
-    checkSpace(event);
+    occupySpace(event);
     displayToken(playerTwo, event);
   }
 })
@@ -64,7 +64,7 @@ function displayToken(player, event) {
   event.target.innerHTML = `<h1>${player.token}</h1>`
 }
 
-function checkSpace(event) {
+function occupySpace(event) {
   for (var i = 0; i < spaces.length; i++) {
     if (event.target.id === spaces[i].id) {
       gameState.spaceOccupied.push(spaces[i]) 
