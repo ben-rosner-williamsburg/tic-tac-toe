@@ -5,12 +5,8 @@ var gameState = {};
 var playerOne = createPlayer(1, "😳");
 var playerTwo = createPlayer(2, "🌮");
 
-playerOneContainer.addEventListener("load", function () {
-  displayPlayerInfo(playerOne, playerOneContainer);
-});
-playerTwoContainer.addEventListener("load", function () {
-  displayPlayerInfo(playerTwo, playerTwoContainer);
-});
+playerOneContainer.addEventListener("load", displayPlayerInfo(playerOne, playerOneContainer));
+playerTwoContainer.addEventListener("load", displayPlayerInfo(playerTwo, playerTwoContainer));
 
 
 function createPlayer(id, token, wins = 0) {
@@ -30,4 +26,3 @@ function displayPlayerInfo(player, container) {
   container.innerHTML = `<h2>${player.token}<h2>
   <h4>${player.wins} wins </h4>`;
 }
-
