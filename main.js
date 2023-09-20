@@ -8,8 +8,8 @@ var gameState = {
   wins: []
 };
 
-var playerOne = createPlayer(1, "😳");
-var playerTwo = createPlayer(2, "🌮");
+var playerOne = createPlayer(1, "❎");
+var playerTwo = createPlayer(2, "🅾️");
 
 playerOneContainer.addEventListener("load", displayPlayerInfo(playerOne, playerOneContainer));
 playerTwoContainer.addEventListener("load", displayPlayerInfo(playerTwo, playerTwoContainer));
