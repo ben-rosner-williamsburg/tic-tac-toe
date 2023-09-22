@@ -50,7 +50,7 @@ function displayPlayerInfo(player, container) {
 function gameBoardState(player, event) {
   for (var i = 0; i < spaces.length; i++) {
     if (event.target.id === spaces[i].id) {
-      displayToken(player, event)
+      displayToken(player, event);
     }
   }
 }
@@ -75,11 +75,11 @@ function displayToken(player, event) {
 function occupySpace(event) {
   for (var i = 0; i < spaces.length; i++) {
     if (event.target.id === spaces[i].id && currentPlayer === playerOne) {
-      playerOne.playerSpacesOccupied.push(spaces[i].id)
+      playerOne.playerSpacesOccupied.push(spaces[i].id);
       gameState.spacesOccupied.push(spaces[i].id);
     }
     else if (event.target.id === spaces[i].id && currentPlayer === playerTwo) {
-      playerTwo.playerSpacesOccupied.push(spaces[i].id)
+      playerTwo.playerSpacesOccupied.push(spaces[i].id);
       gameState.spacesOccupied.push(spaces[i].id);
     }
   }
@@ -118,7 +118,7 @@ function checkForWin() {
 
 function checkForDraw() {
   if (gameState.spacesOccupied.length >= 9 && checkForWin !== true) {
-    changeHeaderText("It's a draw!")
+    changeHeaderText("It's a draw!");
     resetBoard();
   }
 }
@@ -137,7 +137,7 @@ function resetBoard() {
     playerOne.playerSpacesOccupied = [];
     playerTwo.playerSpacesOccupied = [];
     for (var i = 0; i < spaces.length; i++) {
-      spaces[i].innerHTML = ""
+      spaces[i].innerHTML = "";
     }
   }, 1000);
 }
