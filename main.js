@@ -2,6 +2,7 @@ var playerOneContainer = document.querySelector(".player-one-container");
 var playerTwoContainer = document.querySelector(".player-two-container");
 var gameBoard = document.querySelector(".game-board");
 var spaces = document.querySelectorAll(".space");
+var headerText = document.querySelector(".header-text");
 
 var gameState = {
   spacesOccupied: [],
@@ -18,9 +19,9 @@ gameBoard.addEventListener("click", function (event) {
   gameBoardState(currentPlayer, event);
   occupySpace(event);
   displayToken(currentPlayer, event);
-  checkForWin();
-  checkForDraw();
   takeTurn();
+  checkForDraw();
+  checkForWin();
   displayPlayerInfo(playerOne, playerOneContainer);
   displayPlayerInfo(playerTwo, playerTwoContainer);
 })
@@ -54,9 +55,11 @@ function gameBoardState(player, event) {
 
 function takeTurn() {
   if (currentPlayer === playerOne) {
+    changeHeaderText("It's player two's turn")
     currentPlayer = playerTwo;
   }
   else {
+    changeHeaderText("It's player one's turn")
     currentPlayer = playerOne;
   }
 }
@@ -95,6 +98,7 @@ function checkForWin() {
       if (playerOne.playerSpacesOccupied.includes(combinations[i][0]) && 
       playerOne.playerSpacesOccupied.includes(combinations[i][1]) && 
       playerOne.playerSpacesOccupied.includes(combinations[i][2])){
+        changeHeaderText("Player one wins!");
         increaseWins(playerOne);
         gameState.wins.push(playerOne);
         resetBoard();
@@ -102,28 +106,40 @@ function checkForWin() {
       else if (playerTwo.playerSpacesOccupied.includes(combinations[i][0]) && 
       playerTwo.playerSpacesOccupied.includes(combinations[i][1]) && 
       playerTwo.playerSpacesOccupied.includes(combinations[i][2])) {
+        changeHeaderText("Player two wins");
         increaseWins(playerTwo);
         gameState.wins.push(playerTwo);
-        resetBoard()
+        resetBoard();
       }
     }
-    return "Keep Playing!";
 }
 
 function checkForDraw() {
   if (gameState.spacesOccupied.length >= 9 && checkForWin !== true){
+    changeHeaderText("It's a draw!")
     resetBoard();
   }
 }
 
 function resetBoard(){
   setTimeout(function() {
+    if (gameState.wins[gameState.wins.length - 1] === playerOne){
+      currentPlayer = playerTwo;
+      changeHeaderText(`It's player two's turn`);
+    }
+    else if (gameState.wins[gameState.wins.length -1] === playerTwo) {
+      currentPlayer = playerOne;
+      changeHeaderText(`It's player one's turn`);
+    }
     gameState.spacesOccupied = [];
-    currentPlayer = playerOne;
     playerOne.playerSpacesOccupied = [];
     playerTwo.playerSpacesOccupied = [];
     for (var i = 0; i < spaces.length; i++) {
       spaces[i].innerHTML = ""
     }
   }, 1000);
+}
+
+function changeHeaderText(newText){
+  headerText.textContent = `${newText}`;
 }
