@@ -4,7 +4,7 @@ var gameBoard = document.querySelector(".game-board");
 var spaces = document.querySelectorAll(".space");
 
 var gameState = {
-  spaceOccupied: [],
+  spacesOccupied: [],
   wins: []
 };
 
@@ -18,8 +18,8 @@ gameBoard.addEventListener("click", function (event) {
   gameBoardState(currentPlayer, event);
   occupySpace(event);
   displayToken(currentPlayer, event);
-  takeTurn()
   checkForWin();
+  takeTurn();
 })
 
 function createPlayer(id, token, wins = 0) {
@@ -27,6 +27,7 @@ function createPlayer(id, token, wins = 0) {
     id: id,
     token: token,
     wins: wins,
+    playerSpacesOccupied: []
   }
   return player;
 }
@@ -49,29 +50,34 @@ function gameBoardState(player, event) {
 }
 
 function takeTurn() {
-    if (currentPlayer === playerOne) {
-      currentPlayer = playerTwo;
-    }
-    else {
-      currentPlayer = playerOne;
-    }
+  if (currentPlayer === playerOne) {
+    currentPlayer = playerTwo;
+  }
+  else {
+    currentPlayer = playerOne;
+  }
 }
 
 function displayToken(player, event) {
-  if (event.target.classList.contains("space")){
+  if (event.target.classList.contains("space")) {
     event.target.innerHTML = `<h1 class="token">${player.token}</h1>`;
   }
 }
 
 function occupySpace(event) {
   for (var i = 0; i < spaces.length; i++) {
-    if (event.target.id === spaces[i].id){
-      gameState.spaceOccupied.push(spaces[i].id);
+    if (event.target.id === spaces[i].id && currentPlayer === playerOne) {
+      playerOne.playerSpacesOccupied.push(spaces[i].id)
+      gameState.spacesOccupied.push(spaces[i].id);
+    }
+    else if (event.target.id === spaces[i].id && currentPlayer === playerTwo) {
+      playerTwo.playerSpacesOccupied.push(spaces[i].id)
+      gameState.spacesOccupied.push(spaces[i].id);
     }
   }
 }
 
-function checkForWin(spaces){
+function checkForWin() {
   var combinations = [
     ["one", "two", "three"],
     ["four", "five", "six"],
@@ -80,12 +86,19 @@ function checkForWin(spaces){
     ["two", "five", "eight"],
     ["three", "six", "nine"],
     ["one", "five", "nine"],
-    ["three", "five", "eight"]
+    ["three", "five", "seven"]
   ]
-  for (var i = 0; i < spaces.length; i++){
-    if (spaces[i].id === combinations[i][0] && combinations[i][1] && combinations[i][2]) {
-      return true;
+  for (var i = 0; i < combinations.length; i++) {
+      if (playerOne.playerSpacesOccupied.includes(combinations[i][0]) && 
+      playerOne.playerSpacesOccupied.includes(combinations[i][1]) && 
+      playerOne.playerSpacesOccupied.includes(combinations[i][2])){
+        return `Player one wins!`;
+      }
+      else if (playerTwo.playerSpacesOccupied.includes(combinations[i][0]) && 
+      playerTwo.playerSpacesOccupied.includes(combinations[i][1]) && 
+      playerTwo.playerSpacesOccupied.includes(combinations[i][2])) {
+        return `Player two wins!`;
+      }
     }
-  }
-  return false;
+    return "Keep Playing!";
 }
