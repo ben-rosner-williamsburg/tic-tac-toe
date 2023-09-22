@@ -55,11 +55,11 @@ function gameBoardState(player, event) {
 
 function takeTurn() {
   if (currentPlayer === playerOne) {
-    changeHeaderText("It's player two's turn")
+    changeHeaderText(`It's ${playerTwo.token}\'s turn`)
     currentPlayer = playerTwo;
   }
   else {
-    changeHeaderText("It's player one's turn")
+    changeHeaderText(`It's ${playerOne.token}\'s turn`)
     currentPlayer = playerOne;
   }
 }
@@ -98,7 +98,7 @@ function checkForWin() {
       if (playerOne.playerSpacesOccupied.includes(combinations[i][0]) && 
       playerOne.playerSpacesOccupied.includes(combinations[i][1]) && 
       playerOne.playerSpacesOccupied.includes(combinations[i][2])){
-        changeHeaderText("Player one wins!");
+        changeHeaderText(`${playerOne.token} wins!`);
         increaseWins(playerOne);
         gameState.wins.push(playerOne);
         resetBoard();
@@ -106,7 +106,7 @@ function checkForWin() {
       else if (playerTwo.playerSpacesOccupied.includes(combinations[i][0]) && 
       playerTwo.playerSpacesOccupied.includes(combinations[i][1]) && 
       playerTwo.playerSpacesOccupied.includes(combinations[i][2])) {
-        changeHeaderText("Player two wins");
+        changeHeaderText(`${playerTwo.token} wins`);
         increaseWins(playerTwo);
         gameState.wins.push(playerTwo);
         resetBoard();
@@ -125,11 +125,11 @@ function resetBoard(){
   setTimeout(function() {
     if (gameState.wins[gameState.wins.length - 1] === playerOne){
       currentPlayer = playerTwo;
-      changeHeaderText(`It's player two's turn`);
+      changeHeaderText(`It's ${playerTwo.token}\'s turn`);
     }
     else if (gameState.wins[gameState.wins.length -1] === playerTwo) {
       currentPlayer = playerOne;
-      changeHeaderText(`It's player one's turn`);
+      changeHeaderText(`It's ${playerOne.token}\'s turn`);
     }
     gameState.spacesOccupied = [];
     playerOne.playerSpacesOccupied = [];
