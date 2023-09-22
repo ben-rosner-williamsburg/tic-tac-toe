@@ -16,14 +16,16 @@ var currentPlayer = playerOne;
 playerOneContainer.addEventListener("load", displayPlayerInfo(playerOne, playerOneContainer));
 playerTwoContainer.addEventListener("load", displayPlayerInfo(playerTwo, playerTwoContainer));
 gameBoard.addEventListener("click", function (event) {
-  gameBoardState(currentPlayer, event);
-  occupySpace(event);
-  displayToken(currentPlayer, event);
-  takeTurn();
-  checkForDraw();
-  checkForWin();
-  displayPlayerInfo(playerOne, playerOneContainer);
-  displayPlayerInfo(playerTwo, playerTwoContainer);
+  if (!gameState.spacesOccupied.includes(event.target.id) && event.target.classList.contains("space")) {
+    gameBoardState(currentPlayer, event);
+    occupySpace(event);
+    displayToken(currentPlayer, event);
+    takeTurn();
+    checkForDraw();
+    checkForWin();
+    displayPlayerInfo(playerOne, playerOneContainer);
+    displayPlayerInfo(playerTwo, playerTwoContainer);
+  }
 })
 
 function createPlayer(id, token, wins = 0) {
@@ -95,39 +97,39 @@ function checkForWin() {
     ["three", "five", "seven"]
   ]
   for (var i = 0; i < combinations.length; i++) {
-      if (playerOne.playerSpacesOccupied.includes(combinations[i][0]) && 
-      playerOne.playerSpacesOccupied.includes(combinations[i][1]) && 
-      playerOne.playerSpacesOccupied.includes(combinations[i][2])){
-        changeHeaderText(`${playerOne.token} wins!`);
-        increaseWins(playerOne);
-        gameState.wins.push(playerOne);
-        resetBoard();
-      }
-      else if (playerTwo.playerSpacesOccupied.includes(combinations[i][0]) && 
-      playerTwo.playerSpacesOccupied.includes(combinations[i][1]) && 
-      playerTwo.playerSpacesOccupied.includes(combinations[i][2])) {
-        changeHeaderText(`${playerTwo.token} wins`);
-        increaseWins(playerTwo);
-        gameState.wins.push(playerTwo);
-        resetBoard();
-      }
+    if (playerOne.playerSpacesOccupied.includes(combinations[i][0]) &&
+      playerOne.playerSpacesOccupied.includes(combinations[i][1]) &&
+      playerOne.playerSpacesOccupied.includes(combinations[i][2])) {
+      changeHeaderText(`${playerOne.token} wins!`);
+      increaseWins(playerOne);
+      gameState.wins.push(playerOne);
+      resetBoard();
     }
+    else if (playerTwo.playerSpacesOccupied.includes(combinations[i][0]) &&
+      playerTwo.playerSpacesOccupied.includes(combinations[i][1]) &&
+      playerTwo.playerSpacesOccupied.includes(combinations[i][2])) {
+      changeHeaderText(`${playerTwo.token} wins`);
+      increaseWins(playerTwo);
+      gameState.wins.push(playerTwo);
+      resetBoard();
+    }
+  }
 }
 
 function checkForDraw() {
-  if (gameState.spacesOccupied.length >= 9 && checkForWin !== true){
+  if (gameState.spacesOccupied.length >= 9 && checkForWin !== true) {
     changeHeaderText("It's a draw!")
     resetBoard();
   }
 }
 
-function resetBoard(){
-  setTimeout(function() {
-    if (gameState.wins[gameState.wins.length - 1] === playerOne){
+function resetBoard() {
+  setTimeout(function () {
+    if (gameState.wins[gameState.wins.length - 1] === playerOne) {
       currentPlayer = playerTwo;
       changeHeaderText(`It's ${playerTwo.token}\'s turn`);
     }
-    else if (gameState.wins[gameState.wins.length -1] === playerTwo) {
+    else if (gameState.wins[gameState.wins.length - 1] === playerTwo) {
       currentPlayer = playerOne;
       changeHeaderText(`It's ${playerOne.token}\'s turn`);
     }
@@ -140,6 +142,6 @@ function resetBoard(){
   }, 1000);
 }
 
-function changeHeaderText(newText){
+function changeHeaderText(newText) {
   headerText.textContent = `${newText}`;
 }
