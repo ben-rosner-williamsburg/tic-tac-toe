@@ -19,6 +19,7 @@ gameBoard.addEventListener("click", function (event) {
   occupySpace(event);
   displayToken(currentPlayer, event);
   checkForWin();
+  checkForDraw();
   takeTurn();
 })
 
@@ -103,4 +104,10 @@ function checkForWin() {
       }
     }
     return "Keep Playing!";
+}
+
+function checkForDraw() {
+  if (gameState.spacesOccupied.length >= 9){
+    return `Draw!`
+  }
 }
