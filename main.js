@@ -92,11 +92,13 @@ function checkForWin() {
       if (playerOne.playerSpacesOccupied.includes(combinations[i][0]) && 
       playerOne.playerSpacesOccupied.includes(combinations[i][1]) && 
       playerOne.playerSpacesOccupied.includes(combinations[i][2])){
+        increaseWins(playerOne);
         return `Player one wins!`;
       }
       else if (playerTwo.playerSpacesOccupied.includes(combinations[i][0]) && 
       playerTwo.playerSpacesOccupied.includes(combinations[i][1]) && 
       playerTwo.playerSpacesOccupied.includes(combinations[i][2])) {
+        increaseWins(playerTwo);
         return `Player two wins!`;
       }
     }
