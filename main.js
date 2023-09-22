@@ -21,6 +21,8 @@ gameBoard.addEventListener("click", function (event) {
   checkForWin();
   checkForDraw();
   takeTurn();
+  displayPlayerInfo(playerOne, playerOneContainer);
+  displayPlayerInfo(playerTwo, playerTwoContainer);
 })
 
 function createPlayer(id, token, wins = 0) {
@@ -94,20 +96,34 @@ function checkForWin() {
       playerOne.playerSpacesOccupied.includes(combinations[i][1]) && 
       playerOne.playerSpacesOccupied.includes(combinations[i][2])){
         increaseWins(playerOne);
-        return `Player one wins!`;
+        gameState.wins.push(playerOne);
+        resetBoard();
       }
       else if (playerTwo.playerSpacesOccupied.includes(combinations[i][0]) && 
       playerTwo.playerSpacesOccupied.includes(combinations[i][1]) && 
       playerTwo.playerSpacesOccupied.includes(combinations[i][2])) {
         increaseWins(playerTwo);
-        return `Player two wins!`;
+        gameState.wins.push(playerTwo);
+        resetBoard()
       }
     }
     return "Keep Playing!";
 }
 
 function checkForDraw() {
-  if (gameState.spacesOccupied.length >= 9){
-    return `Draw!`
+  if (gameState.spacesOccupied.length >= 9 && checkForWin !== true){
+    resetBoard();
   }
+}
+
+function resetBoard(){
+  setTimeout(function() {
+    gameState.spacesOccupied = [];
+    currentPlayer = playerOne;
+    playerOne.playerSpacesOccupied = [];
+    playerTwo.playerSpacesOccupied = [];
+    for (var i = 0; i < spaces.length; i++) {
+      spaces[i].innerHTML = ""
+    }
+  }, 1000);
 }
