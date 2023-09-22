@@ -1,6 +1,6 @@
 body {
   display: flex;
-  background-image: url(assets/space_img.jpg) ;
+  background-image: url(assets/space_img.jpg);
   background-size: cover;
   justify-content: space-around;
 }
@@ -52,8 +52,3 @@ td {
   display: flex;
   justify-content: space-evenly;
 }
-
-.hidden {
-  visibility: hidden;
-}
-
