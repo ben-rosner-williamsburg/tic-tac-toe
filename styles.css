@@ -1,6 +1,7 @@
 body {
   display: flex;
-  background-image: radial-gradient(#03045e, #caf0f8);
+  background-image: url(assets/space_img.jpg) ;
+  background-size: cover;
   justify-content: space-around;
 }
 
@@ -19,8 +20,9 @@ body {
 .center-area > p, .wins-container {
   text-align: center;
   font-family: 'Ubuntu', sans-serif;
+  font-weight: 700;
   font-size: 36px;
-  letter-spacing: 1.8px;
+  letter-spacing: 2px;
   color: #00b4d8;
 }
 
@@ -37,8 +39,6 @@ td {
   display: flex;
   flex-direction: column;
   text-align: center;
-  letter-spacing: 1.2px;
-  font-weight: bold;
   font-size: 28px;
   margin-top: -20px;
 }

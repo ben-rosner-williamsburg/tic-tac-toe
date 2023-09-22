@@ -19,7 +19,7 @@ gameBoard.addEventListener("click", function (event) {
   occupySpace(event);
   displayToken(currentPlayer, event);
   takeTurn()
-  checkForWin(spaces);
+  checkForWin();
 })
 
 function createPlayer(id, token, wins = 0) {
@@ -58,13 +58,15 @@ function takeTurn() {
 }
 
 function displayToken(player, event) {
-  event.target.innerHTML = `<h1 class="token">${player.token}</h1>`
+  if (event.target.classList.contains("space")){
+    event.target.innerHTML = `<h1 class="token">${player.token}</h1>`;
+  }
 }
 
 function occupySpace(event) {
   for (var i = 0; i < spaces.length; i++) {
-    if (event.target.id === spaces[i].id) {
-      gameState.spaceOccupied.push(spaces[i])
+    if (event.target.id === spaces[i].id){
+      gameState.spaceOccupied.push(spaces[i].id);
     }
   }
 }
