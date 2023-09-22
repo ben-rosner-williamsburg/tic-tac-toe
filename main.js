@@ -10,7 +10,7 @@ var gameState = {
 
 var playerOne = createPlayer(1, "❎");
 var playerTwo = createPlayer(2, "🅾️");
-var currentPlayer = playerOne
+var currentPlayer = playerOne;
 
 playerOneContainer.addEventListener("load", displayPlayerInfo(playerOne, playerOneContainer));
 playerTwoContainer.addEventListener("load", displayPlayerInfo(playerTwo, playerTwoContainer));
@@ -19,6 +19,7 @@ gameBoard.addEventListener("click", function (event) {
   occupySpace(event);
   displayToken(currentPlayer, event);
   takeTurn()
+  checkForWin();
 })
 
 function createPlayer(id, token, wins = 0) {
@@ -68,4 +69,23 @@ function occupySpace(event) {
       gameState.spaceOccupied.push(spaces[i].id);
     }
   }
+}
+
+function checkForWin(spaces){
+  var combinations = [
+    ["one", "two", "three"],
+    ["four", "five", "six"],
+    ["seven", "eight", "nine"],
+    ["one", "four", "seven"],
+    ["two", "five", "eight"],
+    ["three", "six", "nine"],
+    ["one", "five", "nine"],
+    ["three", "five", "eight"]
+  ]
+  for (var i = 0; i < spaces.length; i++){
+    if (spaces[i].id === combinations[i][0] && combinations[i][1] && combinations[i][2]) {
+      return true;
+    }
+  }
+  return false;
 }
