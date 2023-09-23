@@ -108,7 +108,7 @@ function checkForWin() {
     else if (playerTwo.playerSpacesOccupied.includes(combinations[i][0]) &&
       playerTwo.playerSpacesOccupied.includes(combinations[i][1]) &&
       playerTwo.playerSpacesOccupied.includes(combinations[i][2])) {
-      changeHeaderText(`${playerTwo.token} wins`);
+      changeHeaderText(`${playerTwo.token} wins!`);
       increaseWins(playerTwo);
       gameState.wins.push(playerTwo);
       resetBoard();
