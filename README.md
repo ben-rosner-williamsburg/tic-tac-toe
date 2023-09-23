@@ -12,7 +12,7 @@ This project is a tic-tac-toe game that can be played with two human players. Pl
 
 ---
 ### Preview of App:
-![Tic Tac Toe Screenshot](/Users/benrosnerwilliamsburg/turing_work/1mod/tic-tac-toe/assets/tic_tac_toe_screenshot.png)
+![Tic Tac Toe Screenshot](assets/tic_tac_toe_screenshot.png)
 
 ---
 ### Context:
