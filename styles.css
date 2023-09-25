@@ -12,12 +12,13 @@ body {
   height: 100%;
 }
 
-.center-area > .emoji {
+.center-area>.emoji {
   font-size: 68px;
   text-align: center;
 }
 
-.center-area > p, .wins-container {
+.center-area>p,
+.wins-container {
   text-align: center;
   font-family: 'Ubuntu', sans-serif;
   font-weight: 700;
@@ -35,15 +36,15 @@ td {
 .wins-container {
   background-image: radial-gradient(#03045e, #caf0f8);
   width: 250px;
-  height: 750px;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   text-align: center;
   font-size: 28px;
-  margin-top: -20px;
 }
 
-.wins-container > .emoji, .token {
+.wins-container>.emoji,
+.token {
   font-size: 36px;
   text-align: center;
 }
