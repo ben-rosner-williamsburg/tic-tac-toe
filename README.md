@@ -10,6 +10,7 @@ This project is a tic-tac-toe game that can be played with two human players. Pl
 3. In your machine's Terminal when the repo is the current directory, type in `open index.html`
 4. Start playing!
 
+Deployed Link: https://ben-rosner-williamsburg.github.io/tic-tac-toe/
 ---
 ### Preview of App:
 ![Tic Tac Toe Screenshot](assets/tic_tac_toe_screenshot.png)
